@@ -1,5 +1,6 @@
-// [ARIF] Halaman utama: menyusun semua komponen (hero -> kota -> contoh itinerary -> fitur -> footer).
-import { Alert, FlatList, ScrollView, Text, View } from 'react-native';
+// [ARIF] Halaman utama (route "/"). Modul 2: tombol pindah halaman pakai router.push().
+import { useRouter } from 'expo-router';
+import { FlatList, ScrollView, Text, View } from 'react-native';
 import { generateItinerary, getTotalCost } from '../algorithms/generateItinerary';
 import DayCard from '../components/DayCard';
 import DestinationCard from '../components/DestinationCard';
@@ -14,6 +15,8 @@ import { samplePreferences } from '../data/samplePreferences';
 import { landing } from '../styles/landing.styles';
 
 export default function Index() {
+  const router = useRouter();
+
   // Itinerary contoh dihitung dari preferensi tetap
   const plans = generateItinerary(samplePreferences, places);
   const totalPerPerson = getTotalCost(plans);
@@ -59,7 +62,7 @@ export default function Index() {
         <PrimaryButton
           label="Start Planning"
           icon="airplane"
-          onPress={() => Alert.alert('Coming soon', 'The planner form will be added in the next module.')}
+          onPress={() => router.push('/planner')}
         />
       </View>
     </ScrollView>
