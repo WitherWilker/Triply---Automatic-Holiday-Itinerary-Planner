@@ -1,5 +1,6 @@
-// [ARIF] Satu kartu kota. Data diterima lewat props.
-import { Alert, Image, Text, View } from 'react-native';
+// [ARIF] Satu kartu kota. Tombol mengirim nama kota ke halaman planner lewat router.push().
+import { useRouter } from 'expo-router';
+import { Image, Text, View } from 'react-native';
 import { landing } from '../styles/landing.styles';
 import { Destination } from '../types';
 import PrimaryButton from './PrimaryButton';
@@ -7,8 +8,10 @@ import PrimaryButton from './PrimaryButton';
 type Props = { destination: Destination };
 
 export default function DestinationCard({ destination }: Props) {
+  const router = useRouter();
+
   const handlePlan = () => {
-    Alert.alert('Plan a trip', 'You picked ' + destination.name + '!');
+    router.push({ pathname: '/planner', params: { city: destination.name } });
   };
 
   return (
